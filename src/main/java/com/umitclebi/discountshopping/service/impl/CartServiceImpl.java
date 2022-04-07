@@ -1,6 +1,8 @@
 package com.umitclebi.discountshopping.service.impl;
 
 import com.umitclebi.discountshopping.enums.DiscountType;
+import com.umitclebi.discountshopping.enums.ProductTypeEnum;
+import com.umitclebi.discountshopping.enums.StoreCardEnum;
 import com.umitclebi.discountshopping.models.*;
 import com.umitclebi.discountshopping.repo.CartRepository;
 import com.umitclebi.discountshopping.service.CartService;
@@ -16,9 +18,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class CartServiceImpl implements CartService {
 
-    private final String GOLD_CARD="Gold";
-    private final String SILVER_CARD="Silver";
-    private final String PRODUCT_TYPE_PHONE="Phone";
 
     @Autowired
     CartRepository cartRepository;
@@ -36,7 +35,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart calculateTotalPrice(Cart cart) {
         cart.setBasePrice(calculateBasePrice(cart).getBasePrice());
-        cart.setDiscount(calculateDiscount(cart).getDiscount());
+        cart.setDiscount(Objects.nonNull(calculateDiscount(cart).getDiscount())?calculateDiscount(cart).getDiscount():null);
         if(Objects.nonNull(cart.getDiscount())){
             cart.setTotalPrice(cart.getBasePrice().subtract(cart.getDiscount().getTotalDiscount()));
         }
@@ -47,12 +46,12 @@ public class CartServiceImpl implements CartService {
     public Cart calculateDiscount(Cart cart) {
         BigDecimal result = BigDecimal.ZERO;
         Discount discount=Discount.builder().totalDiscount(result).build();
-        if (cart.getEntries().stream().anyMatch(product -> product.getProductType().equals(PRODUCT_TYPE_PHONE))) return cart;
+        if (Objects.nonNull(cart.getEntries()) && cart.getEntries().stream().anyMatch(product -> product.getProductType().equals(ProductTypeEnum.PHONE))) return cart;
 
-        if (Objects.nonNull(cart.getCustomer().getCard()) && cart.getCustomer().getCard().getCardType().equals(GOLD_CARD)){
+        if (Objects.nonNull(cart.getCustomer().getCard()) && cart.getCustomer().getCard().getCardType().equals(StoreCardEnum.GOLD)){
             result=cart.getBasePrice().multiply(new BigDecimal("0.3"));
             discount.setDiscountType(DiscountType.STORE_CARD);
-        }else if (Objects.nonNull(cart.getCustomer().getCard()) && cart.getCustomer().getCard().getCardType().equals(SILVER_CARD)){
+        }else if (Objects.nonNull(cart.getCustomer().getCard()) && cart.getCustomer().getCard().getCardType().equals(StoreCardEnum.SILVER)){
             result=cart.getBasePrice().multiply(new BigDecimal("0.2"));
             discount.setDiscountType(DiscountType.STORE_CARD);
         }else if(cart.getCustomer().isAffiliate()){

@@ -1,5 +1,6 @@
 package com.umitclebi.discountshopping.models;
 
+import com.umitclebi.discountshopping.enums.ProductTypeEnum;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import java.util.List;
 @Builder
 @Entity
 public class Product extends Item{
-    private String ProductType;
+    private ProductTypeEnum ProductType;
     private String productCode;
     private String name;
     private String brand;
