@@ -19,7 +19,6 @@ public class Customer extends Item{
 
     private boolean affiliate;
 
-    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="store_card_id")
     private StoreCard card;

@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -72,11 +74,20 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart calculateBasePrice(Cart cart) {
         BigDecimal basePrice = BigDecimal.ZERO;
+        cart.getEntries().removeAll(removeNoStockProduct(cart));
         basePrice=Objects.nonNull(cart.getEntries()) ?
                 cart.getEntries().stream().map(Product::getPrice).reduce(BigDecimal.ZERO,BigDecimal::add)
                 :basePrice;
         cart.setBasePrice(basePrice);
         return cart;
+    }
+
+    @Override
+    public List<Product> removeNoStockProduct(Cart cart) {
+        if(Objects.nonNull(cart.getEntries())){
+            return cart.getEntries().stream().filter(p->p.getStock()<=0).collect(Collectors.toList());
+        }
+        return null;
     }
 
 }
