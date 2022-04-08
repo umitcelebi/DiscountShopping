@@ -1,5 +1,5 @@
 
-CREATE TABLE `store_card`
+CREATE TABLE IF NOT EXISTS `store_card`
 (
     `id`            binary(16) NOT NULL PRIMARY KEY,
     `creation_time` datetime     DEFAULT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `store_card`
 
 
 
-CREATE TABLE `customer`
+CREATE TABLE IF NOT EXISTS `customer`
 (
     `id`            binary(16) NOT NULL PRIMARY KEY,
     `creation_time` datetime     DEFAULT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE `customer`
 
 
 
-CREATE TABLE `discount`
+CREATE TABLE IF NOT EXISTS `discount`
 (
     `id`             binary(16) NOT NULL PRIMARY KEY,
     `creation_time`  datetime       DEFAULT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `discount`
 
 
 
-CREATE TABLE `product`
+CREATE TABLE IF NOT EXISTS `product`
 (
     `id`            binary(16) NOT NULL PRIMARY KEY,
     `creation_time` datetime       DEFAULT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `product`
     `product_code`  varchar(255)   DEFAULT NULL
 );
 
-CREATE TABLE `cart`
+CREATE TABLE IF NOT EXISTS `cart`
 (
     `id`               binary(16) NOT NULL PRIMARY KEY,
     `creation_time`    datetime       DEFAULT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `cart`
 );
 
 
-CREATE TABLE `product_cart`
+CREATE TABLE IF NOT EXISTS `product_cart`
 (
     `product_id` binary(16) NOT NULL,
     `cart_id`    binary(16) NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE `product_cart`
 
 
 
-CREATE TABLE `cart_entries`
+CREATE TABLE IF NOT EXISTS `cart_entries`
 (
     `cart_id`    binary(16) NOT NULL,
     `entries_id` binary(16) NOT NULL,
