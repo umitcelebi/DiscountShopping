@@ -111,7 +111,7 @@ class CartControllerTest {
 
         String cartDtoJson = objectMapper.writeValueAsString(cart);
 
-        mockMvc.perform(post("/cart")
+        mockMvc.perform(post("/cart/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(cartDtoJson))
                 .andExpect(status().isCreated());

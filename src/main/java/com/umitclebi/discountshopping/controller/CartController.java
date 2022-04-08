@@ -26,6 +26,7 @@ public class CartController {
 
     @PostMapping("/add")
     public ResponseEntity<Cart> saveCart(@RequestBody Cart cart){
+        cart=cartService.calculateTotalPrice(cart);
         Cart savedCart=cartService.saveCart(cart);
         return new ResponseEntity<>(savedCart,HttpStatus.CREATED);
     }
