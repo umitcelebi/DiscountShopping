@@ -1,5 +1,6 @@
 package com.umitclebi.discountshopping.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umitclebi.discountshopping.enums.DiscountType;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Discount extends Item{
     private DiscountType discountType;
     private BigDecimal totalDiscount;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "discount")
     private List<Cart> carts;
 }

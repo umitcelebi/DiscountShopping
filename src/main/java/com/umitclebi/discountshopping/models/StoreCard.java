@@ -1,5 +1,6 @@
 package com.umitclebi.discountshopping.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umitclebi.discountshopping.enums.StoreCardEnum;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class StoreCard extends Item{
     private StoreCardEnum cardType;
     private String cartNumber;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "card")
     private List<Customer> customers;
 }

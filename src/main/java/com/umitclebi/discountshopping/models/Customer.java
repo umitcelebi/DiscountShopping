@@ -1,5 +1,6 @@
 package com.umitclebi.discountshopping.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,10 +19,12 @@ public class Customer extends Item{
 
     private boolean affiliate;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="store_card_id")
     private StoreCard card;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "customer")
     private Cart cart;
 }

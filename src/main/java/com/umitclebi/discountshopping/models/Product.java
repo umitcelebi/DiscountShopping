@@ -1,5 +1,6 @@
 package com.umitclebi.discountshopping.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umitclebi.discountshopping.enums.ProductTypeEnum;
 import lombok.*;
 
@@ -24,6 +25,7 @@ public class Product extends Item{
     private BigDecimal price;
     private int Stock;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "product_cart",
     joinColumns = @JoinColumn(name = "product_id"),
