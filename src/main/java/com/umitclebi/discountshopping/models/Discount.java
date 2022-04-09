@@ -3,6 +3,7 @@ package com.umitclebi.discountshopping.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umitclebi.discountshopping.enums.DiscountType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 public class Discount extends Item{
     private DiscountType discountType;

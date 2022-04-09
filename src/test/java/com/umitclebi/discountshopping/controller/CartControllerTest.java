@@ -1,10 +1,13 @@
 package com.umitclebi.discountshopping.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.umitclebi.discountshopping.dto.CartDto;
+import com.umitclebi.discountshopping.dto.CustomerDto;
+import com.umitclebi.discountshopping.dto.ProductDto;
+import com.umitclebi.discountshopping.dto.StoreCardDto;
 import com.umitclebi.discountshopping.enums.PaymentType;
 import com.umitclebi.discountshopping.enums.ProductTypeEnum;
 import com.umitclebi.discountshopping.enums.StoreCardEnum;
-import com.umitclebi.discountshopping.models.*;
 import com.umitclebi.discountshopping.service.CartService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,39 +41,39 @@ class CartControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    Cart cart;
-    Customer customer;
-    List<Product> products;
-    StoreCard storeCard;
+    CartDto cart;
+    CustomerDto customer;
+    List<ProductDto> products;
+    StoreCardDto storeCard;
 
     @BeforeEach
     public void setUp() {
-        storeCard=StoreCard.builder()
+        storeCard=StoreCardDto.builder()
                 .cardType(StoreCardEnum.GOLD)
                 .cartNumber("45645354354666")
                 .build();
-        customer=Customer.builder()
+        customer=CustomerDto.builder()
                 .name("Ümit")
                 .lastName("Çelebi")
                 .phoneNumber("05555555555")
                 .affiliate(false)
                 .card(storeCard)
                 .build();
-        products= Arrays.asList(Product.builder()
+        products= Arrays.asList(ProductDto.builder()
                         .ProductType(ProductTypeEnum.TV)
                         .productCode("SM2342")
                         .name("Samsung 42\" TV")
                         .brand("SAMSUNG")
                         .price(new BigDecimal("13450"))
                         .build(),
-                Product.builder()
+                ProductDto.builder()
                         .ProductType(ProductTypeEnum.CAMERA)
                         .productCode("NK384937")
                         .name("Nikon D100")
                         .brand("NIKON")
                         .price(new BigDecimal("6600"))
                         .build());
-        cart=Cart.builder()
+        cart=CartDto.builder()
                 .deliveryAddress("Istanbul/Turkey")
                 .paymentType(PaymentType.CARD)
                 .entries(products)
@@ -90,18 +93,18 @@ class CartControllerTest {
 
     @Test
     void saveCart() throws Exception {
-        storeCard = StoreCard.builder()
+        storeCard = StoreCardDto.builder()
                 .cardType(StoreCardEnum.SILVER)
                 .cartNumber("255623232")
                 .build();
-        customer = Customer.builder()
+        customer = CustomerDto.builder()
                 .name("Muhammed")
                 .lastName("Yılmaz")
                 .phoneNumber("05444444444")
                 .affiliate(false)
                 .card(storeCard)
                 .build();
-        cart = Cart.builder()
+        cart = CartDto.builder()
                 .deliveryAddress("Samsun/TURKEY")
                 .entries(products)
                 .customer(customer)

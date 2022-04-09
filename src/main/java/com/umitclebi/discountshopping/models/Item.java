@@ -1,6 +1,7 @@
 package com.umitclebi.discountshopping.models;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @MappedSuperclass
 public class Item {
     @Id

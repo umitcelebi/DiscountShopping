@@ -3,6 +3,7 @@ package com.umitclebi.discountshopping.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umitclebi.discountshopping.enums.ProductTypeEnum;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,7 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 public class Product extends Item{
     private ProductTypeEnum ProductType;

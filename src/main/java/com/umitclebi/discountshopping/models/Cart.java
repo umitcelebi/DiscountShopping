@@ -2,6 +2,7 @@ package com.umitclebi.discountshopping.models;
 
 import com.umitclebi.discountshopping.enums.PaymentType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 public class Cart extends Item{
     private String deliveryAddress;
